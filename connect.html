@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect | Digital Business Badhao</title>
+    <link href="https://share.google/jP60tjKYkzo9XaOtb" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #050a18;
+            --accent-glow: #00d2ff;
+            --card-glass: rgba(255, 255, 255, 0.08);
+            --btn-grad: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
+            --text-main: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--primary-bg);
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(0, 210, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(58, 123, 213, 0.15) 0%, transparent 40%);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .profile img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--accent-glow);
+            margin-bottom: 15px;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.5);
+            object-fit: cover;
+            /* Photo fix karne ke liye */
+            background: #fff;
+        }
+
+        .profile h1 {
+            font-size: 26px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .profile p {
+            font-size: 14px;
+            color: var(--accent-glow);
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        /* Social Icons Fix */
+        .social-icons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-icons a {
+            background: var(--card-glass);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 24px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-icons a:hover {
+            background: var(--btn-grad);
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Service Cards */
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .service-card {
+            background: var(--card-glass);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .service-card:hover {
+            border: 1px solid var(--accent-glow);
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
+        }
+
+        .service-info h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .service-info p {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--accent-glow);
+            font-size: 14px;
+            background: rgba(0, 210, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 10px;
+        }
+
+        /* Main Website Button */
+        .website-btn {
+            display: block;
+            background: var(--btn-grad);
+            color: #fff;
+            text-align: center;
+            padding: 22px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 18px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.4);
+            transition: 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .location {
+            text-align: center;
+            padding: 15px;
+            opacity: 0.8;
+            font-size: 13px;
+            margin-bottom: 100px;
+            line-height: 1.6;
+        }
+
+        .location a {
+            color: var(--accent-glow);
+            text-decoration: none;
+            border-bottom: 1px solid;
+            font-weight: bold;
+        }
+
+        /* WhatsApp Button */
+        .fab {
+            position: fixed;
+            bottom: 25px;
+            width: 90%;
+            max-width: 400px;
+            background: #25D366;
+            color: white;
+            padding: 18px;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 800;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile">
+        <div class="founder-frame">
+            <img src="founder.png" alt="Preeti digital business Badhao">
+            <span class="digital marketing in Faridabad">Founder</span>
+        </div>
+        <h1>Digital Business Badhao</h1>
+        <p>Expert Leads | SEO | Branding</p>
+    </div>
+    <div class="container">
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/preeti-digital-business-badhao-380864380" target="_blank">🔗</a>
+            <a href="https://www.instagram.com/digital_business_badhao" target="_blank">📸</a>
+            <a href="https://www.facebook.com/share/1DQxj7EZkw/" target="_blank">👤</a>
+            <a href="https://share.google/jP60tjKYkzo9XaOtb" target="_blank">📍</a>
+        </div>
+
+        <div class="section-title">Our Solutions</div>
+
+        <a href="#" class="service-card">
+            <div class="service-info">
+                <h4>Lead Generation</h4>
+                <p>Digital Marketing Expert</p>
+            </div>
+            <div class="price">₹3,999+</div>
+        </a>
+
+        <a href="#" class="service-card">
+            <div class="service-info">
+                <h4>Website Development</h4>
+                <p>Fast, Secure & SEO Ready</p>
+            </div>
+            <div class="price">₹14,999+</div>
+        </a>
+
+        <a href="#" class="service-card">
+            <div class="service-info">
+                <h4>Complete SEO Package</h4>
+                <p>On-Page & Off-Page Ranking</p>
+            </div>
+            <div class="price">Monthly</div>
+        </a>
+
+        <a href="https://digital-business-badhao.github.io/preeti-growth-agency/" class="website-btn">
+            🚀 VISIT MAIN WEBSITE
+        </a>
+
+        <div class="location">
+            📍 Based in Faridabad, Sector 30 <br>
+            <a href="https://share.google/jP60tjKYkzo9XaOtb" target="_blank">Find us on Google Maps</a>
+        </div>
+    </div>
+
+    <a href="https://wa.me/918383855004?text=Hi, I'm interested in your services." class="fab">
+        💬 GET A FREE QUOTE
+    </a>
+
+</body>
+
+</html>
