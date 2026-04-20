@@ -417,57 +417,31 @@ form textarea:focus {
     z-index: 999;
 }
 
-/* --- Footer --- */
+/* --- Optimized Footer Fix --- */
 footer {
-    padding: 70px 8% 30px;
-    background: var(--dark);
+    display: block !important;
+    width: 100%;
+    background: #0d1117; /* Deep Premium Dark */
     color: white;
-}
-
-.footer-content {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.footer-logo {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.footer-logo span {
-    color: var(--secondary);
-}
-
-.footer-content p {
-    color: #bbb;
-    margin-bottom: 20px;
-}
-
-.socials {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.socials a {
-    color: #bbb;
-    font-size: 22px;
-    transition: 0.3s;
-}
-
-.socials a:hover {
-    color: var(--secondary);
-    transform: scale(1.1);
+    padding: 60px 8% 30px;
+    margin-top: 50px;
+    position: relative;
+    clear: both; /* Isse footer hamesha sections ke niche rahega */
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 25px;
     text-align: center;
-    font-size: 14px;
+    margin-top: 30px;
 }
 
+/* Mobile par footer ki padding kam karne ke liye */
+@media (max-width: 768px) {
+    footer {
+        padding: 40px 5% 100px; /* Bottom padding zyada rakhi hai sticky bar ke liye */
+    }
+}
 .disclaimer {
     font-size: 12px;
     margin-top: 15px;
