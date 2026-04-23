@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://digitalbusinessbadhao.github.io/index.html</loc>
+    <lastmod>2026-04-23</lastmod>
+    <priority>1.00</priority>
+  </url>
 
+  <url>
+    <loc>https://digitalbusinessbadhao.github.io/contact.html</loc>
+    <lastmod>2026-04-23</lastmod>
+    <priority>0.90</priority>
+  </url>
 
-<url>
-  <loc>https://digital-business-badhao.github.io/preeti-growth-agency/#contact</loc>
-  <lastmod>2026-04-20T16:49:38+00:00</lastmod>
-</url>
+  <url>
+    <loc>https://digitalbusinessbadhao.github.io/blog.html</loc>
+    <lastmod>2026-04-23</lastmod>
+    <priority>0.85</priority>
+  </url>
 
+  <url>
+    <loc>https://digitalbusinessbadhao.github.io/connect.html</loc>
+    <lastmod>2026-04-23</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://digitalbusinessbadhao.github.io/privacy-policy.html</loc>
+    <lastmod>2026-04-23</lastmod>
+    <priority>0.50</priority>
+  </url>
+
+  <url>
+    <loc>https://digitalbusinessbadhao.github.io/terms.html</loc>
+    <lastmod>2026-04-23</lastmod>
+    <priority>0.50</priority>
+  </url>
 
 </urlset>
