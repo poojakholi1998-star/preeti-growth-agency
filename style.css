@@ -709,6 +709,15 @@ footer {
         font-size: 18px;
     }
 }
+ /* Force image to show */
+.hero-image img {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: 100% !important;
+    max-width: 500px !important;
+    height: auto !important;
+}
 
 /* ============================================================
    MOBILE NAVBAR (Hamburger placeholder)
