@@ -9,20 +9,33 @@ AOS.init({
     once: true
 });
 
-/* ── 2. Popup ──────────────────────────────────────────────── */
-/* ✅ Fixed: was defined twice before; single clean version here */
+/* ── 2. Popup with Scroll Fix ──────────────────────────────── */
+/* ✅ Forcefully enable scroll on page load */
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+});
 function showPopup() {
     const popup = document.getElementById('offerPopup');
     if (!popup) return;
+    
     /* Only show once per browser session */
     if (sessionStorage.getItem('popupShown')) return;
+    
     popup.style.display = 'flex';
+    // ✅ Scroll lock karein jab popup dikhe (optional)
+    // document.body.style.overflow = 'hidden'; 
     sessionStorage.setItem('popupShown', 'true');
 }
 
 function closePopup() {
     const popup = document.getElementById('offerPopup');
-    if (popup) popup.style.display = 'none';
+    if (popup) {
+        popup.style.display = 'none';
+        // ✅ Ensure karein ki scroll wapas chalu ho jaye
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.overflow = 'auto';
+    }
 }
 
 /* Show popup 5 seconds after full page load */
@@ -33,9 +46,10 @@ window.addEventListener('load', function () {
 /* Close popup when clicking outside the content box */
 document.addEventListener('click', function (e) {
     const overlay = document.getElementById('offerPopup');
-    if (e.target === overlay) closePopup();
+    if (e.target === overlay) {
+        closePopup();
+    }
 });
-
 /* ── 3. WhatsApp Form ──────────────────────────────────────── */
 /* ✅ Fixed: values are now properly encoded with encodeURIComponent */
 function sendToWhatsApp() {
