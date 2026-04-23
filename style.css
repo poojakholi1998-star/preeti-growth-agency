@@ -43,56 +43,29 @@ img {
 /* ============================================================
    NAVBAR
    ============================================================ */
-/* ✅ Navbar Container Fix */
+/* Navbar Container */
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
     padding: 15px 8%;
     background: #fff;
     position: fixed;
     width: 100%;
     top: 0;
-    left: 0; /* Add this to ensure it starts from edge */
+    left: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Isse padding layout kharab nahi karegi */
+    box-sizing: border-box;
 }
 
-/* ✅ Nav Links Alignment */
+/* ✅ CENTER ALIGNMENT: Menu links ko beech mein lane ke liye */
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 25px;
-    margin-left: auto; /* Buttons ko right side dhakelta hai */
-    margin-right: 30px; /* Chat button se thodi doori */
-}
-
-/* ✅ Mobile View Fix (Subse Zaroori) */
-@media (max-width: 991px) {
-    nav {
-        flex-wrap: wrap; /* Elements ko next line mein aane dega */
-        padding: 10px 5%;
-    }
-
-    .nav-links {
-        order: 2; /* Menu ko logo ke niche laane ke liye */
-        width: 100%;
-        justify-content: center;
-        margin: 10px 0;
-        gap: 15px;
-        padding: 0;
-    }
-
-    .logo-container {
-        order: 1;
-    }
-
-    .cta-btn {
-        order: 3;
-        width: 100%;
-        text-align: center;
-    }
+    gap: 30px;
+    margin: 0 auto; /* Yeh links ko center mein rakhta hai */
+    padding: 0;
 }
 
 /* Links Styling */
@@ -100,16 +73,40 @@ nav {
     text-decoration: none;
     color: #333;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 15px;
     transition: 0.3s;
-    white-space: nowrap; /* Text ko todne se rokega */
+    white-space: nowrap;
 }
 
 .nav-links a:hover {
-    color: #6c5ce7;
+    color: #6c5ce7; /* Purple Theme Color */
 }
 
-/* Button Fixes */
+/* ✅ Mobile View Fix: Buttons gayab nahi honge */
+@media (max-width: 991px) {
+    nav {
+        flex-direction: column; /* Logo upar, Menu niche */
+        padding: 10px 5%;
+        text-align: center;
+    }
+
+    .nav-links {
+        margin: 15px 0 5px 0;
+        gap: 15px;
+        flex-wrap: wrap; /* Links line tod kar niche aa jayenge */
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+        padding: 5px 10px;
+        background: #f8f9fa; /* Mobile par touch karne mein asani hogi */
+        border-radius: 5px;
+    }
+}
+
+/* Button Fixes for Hero Section */
 .btn-primary, .btn-secondary {
     display: inline-block;
     padding: 12px 25px;
