@@ -1,451 +1,181 @@
 /* ============================================================
-   Preeti Growth Agency — style.css (cleaned & fixed)
+   Preeti Growth Agency — Final Master CSS
    ============================================================ */
 
-/* ✅ Scroll Unlock Fix */
-html, body {
-    overflow-x: hidden !important; 
-    overflow-y: auto !important;   
-    height: auto !important;
-}
-
-body {
-    padding-top: 80px; /* Isse content navbar ke niche nahi chupega */
-}
-
-:root {
-    --primary:      #6c5ce7;
-    --primary-dark: #5a4bcf;
-    --secondary:    #00cec9;
-    --dark:         #2d3436;
-    --light:        #fefefe;
-    --gray:         #636e72;
-    --card-bg:      #ffffff;
-    --gradient:     linear-gradient(135deg, #6c5ce7, #00cec9);
-    --glass:        rgba(255, 255, 255, 0.9);
-}
-
-/* ── Reset ── */
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* ── 1. GLOBAL RESET & SCROLL FIX ── */
 html {
     scroll-behavior: smooth;
-    font-family: 'Poppins', sans-serif;
+    overflow-y: scroll !important;
 }
 
 body {
+    margin: 0;
+    padding: 0;
+    padding-top: 110px; /* Ticker + Navbar ke liye jagah */
+    font-family: 'Poppins', sans-serif;
     background-color: #f6f9fc;
-    color: var(--dark);
-    overflow-x: hidden;
-    font-size: 16px;
+    color: #2d3436;
+    overflow-x: hidden !important;
     line-height: 1.6;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+:root {
+    --primary: #6c5ce7;
+    --dark: #000000;
+    --gradient: linear-gradient(135deg, #6c5ce7, #00cec9);
 }
 
-/* ============================================================
-   NAVBAR
-   ============================================================ */
-/* Navbar Container */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ── 2. PROFESSIONAL NEWS TICKER ── */
+.news-ticker-container {
+    background: var(--dark);
+    color: #fff;
+    padding: 12px 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2000;
+    border-bottom: 2px solid var(--primary);
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+
+.ticker-content { display: flex; align-items: center; }
+
+.trend-tag {
+    background: linear-gradient(90deg, #ff0000, #c0392b);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin: 0 20px;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    animation: pulse 1.5s infinite;
+}
+
+.ticker-wrapper {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker-scroll 25s linear infinite;
+}
+
+.ticker-item {
+    padding-right: 80px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #e0e0e0;
+}
+
+@keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* ── 3. NAVBAR (Centered Menu) ── */
 nav {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
     padding: 15px 8%;
     background: #fff;
     position: fixed;
     width: 100%;
-    top: 0;
+    top: 45px; /* Ticker ke theek niche */
     left: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* ✅ CENTER ALIGNMENT: Menu links ko beech mein lane ke liye */
 .nav-links {
     display: flex;
     list-style: none;
     gap: 30px;
-    margin: 0 auto; /* Yeh links ko center mein rakhta hai */
+    margin: 0 auto; 
     padding: 0;
 }
 
-/* Links Styling */
 .nav-links a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
     font-size: 15px;
     transition: 0.3s;
-    white-space: nowrap;
 }
 
-.nav-links a:hover {
-    color: #6c5ce7; /* Purple Theme Color */
-}
+.nav-links a:hover { color: var(--primary); }
 
-/* ✅ Mobile View Fix: Buttons gayab nahi honge */
-@media (max-width: 991px) {
-    nav {
-        flex-direction: column; /* Logo upar, Menu niche */
-        padding: 10px 5%;
-        text-align: center;
-    }
-
-    .nav-links {
-        margin: 15px 0 5px 0;
-        gap: 15px;
-        flex-wrap: wrap; /* Links line tod kar niche aa jayenge */
-        justify-content: center;
-        width: 100%;
-    }
-
-    .nav-links a {
-        font-size: 13px;
-        padding: 5px 10px;
-        background: #f8f9fa; /* Mobile par touch karne mein asani hogi */
-        border-radius: 5px;
-    }
-}
-
-/* Button Fixes for Hero Section */
-.btn-primary, .btn-secondary {
-    display: inline-block;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-/* ============================================================
-   HERO
-   ============================================================ */
+/* ── 4. HERO SECTION (Side-by-Side) ── */
 .hero {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 60px 8%;
+    min-height: 80vh;
     gap: 40px;
-    padding: 100px 8%;
-    min-height: 85vh;
 }
 
-.hero-content { flex: 1; }
+.hero-content { flex: 1.2; }
+.hero-image { flex: 0.8; display: flex; justify-content: flex-end; }
 
-.hero-content h1 {
-    font-size: 48px;
-    line-height: 1.2;
-    font-weight: 700;
-}
-
-.hero-content h1 span {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero-content p {
-    margin: 25px 0;
-    font-size: 17px;
-    color: var(--gray);
-    max-width: 500px;
-}
-
-.hero-btns { display: flex; flex-wrap: wrap; gap: 10px; }
-
-.hero-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 280px;
-}
-
-.hero-image video {
+.hero-image img {
     width: 100%;
-    max-width: 500px;
-    border-radius: 20px;
-    animation: floating 3s ease-in-out infinite;
+    max-width: 480px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(108, 92, 231, 0.15);
 }
 
-@keyframes floating {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-15px); }
-}
+.hero-content h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.2; }
+.hero-content h1 span { color: var(--primary); }
 
-@media (max-width: 992px) {
-    .hero {
-        flex-direction: column-reverse;
-        text-align: center;
-        padding-top: 60px;
-        min-height: auto;
-    }
-
-    .hero-content p { margin: 20px auto; }
-    .hero-content h1 { font-size: 38px; }
-    .hero-btns { justify-content: center; }
-
-    .hero-image video {
-        max-width: 320px;
-        margin-bottom: 30px;
-    }
-}
-
-/* ============================================================
-   SERVICES
-   ============================================================ */
-.services {
-    padding: 90px 8%;
-    text-align: center;
-    background: #fff;
-}
-
-.services h2 {
-    margin-bottom: 50px;
-    font-size: 36px;
-    font-weight: 700;
-}
-
-.service-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 35px;
-}
-
-.service-card {
-    padding: 45px 35px;
-    border-radius: 20px;
-    background: #fdfdfd;
-    border: 1px solid #f0f0f0;
-    transition: background 0.4s, color 0.4s, transform 0.4s;
-}
-
-.service-card i {
-    font-size: 45px;
-    color: var(--primary);
-    margin-bottom: 25px;
+/* ── 5. BUTTONS ── */
+.btn-primary {
+    padding: 15px 30px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
     display: inline-block;
-    transition: color 0.4s;
+    transition: 0.3s;
 }
 
-.service-card h3 {
-    font-size: 22px;
-    margin-bottom: 12px;
-}
-
-.service-card p {
-    color: var(--gray);
-    font-size: 15px;
-    transition: color 0.4s;
-}
-
-.service-card:hover {
-    background: var(--gradient);
-    color: white;
-    transform: translateY(-10px);
-}
-
-.service-card:hover i,
-.service-card:hover p { color: white; }
-
-/* ============================================================
-   TESTIMONIALS
-   ============================================================ */
-.rating-stars {
-    color: #ffcc00;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.google-verify {
-    font-size: 11px;
-    color: #4285F4;
-    margin-left: auto;
-    align-self: center;
-    font-weight: bold;
-}
-
-.google-verify i {
-    margin-right: 3px;
-}
-
-.more-reviews {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.btn-trust {
-    color: #007bff;
-    text-decoration: underline;
-    font-weight: 600;
-}
-
-.testimonials {
-    padding: 80px 8%;
-    background-color: #f6f9fc;
-}
-.testimonials {
-    padding: 80px 8%;
-    background-color: #f6f9fc;
-}
-
-.testimonials h2 {
-    text-align: center;
-    margin-bottom: 50px;
-    font-size: 36px;
-    font-weight: 700;
-}
-
-.testimonial-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.testimonial-card {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
-}
-
-.testimonial-card .fa-quote-left {
+.btn-secondary {
+    padding: 15px 30px;
+    border: 2px solid var(--primary);
     color: var(--primary);
-    font-size: 24px;
-    margin-bottom: 15px;
-    display: block;
-}
-
-.testimonial-card p { color: var(--gray); }
-
-.client-info {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-    gap: 15px;
-}
-
-.client-avatar {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 20px;
-    color: white;
-    position: relative;
-    border: 3px solid white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0;
-}
-
-.avatar-1 { background-color: #6c5ce7; }
-.avatar-2 { background-color: #00cec9; }
-.avatar-3 { background-color: #ff7675; }
-
-.client-avatar .emoji {
-    position: absolute;
-    bottom: -5px;
-    right: -5px;
-    font-size: 18px;
-    background: white;
-    border-radius: 50%;
-    padding: 2px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    line-height: 1;
-}
-
-.client-info h4 {
-    font-size: 15px;
+    border-radius: 8px;
+    text-decoration: none;
     font-weight: 600;
-    margin-bottom: 2px;
+    display: inline-block;
+    transition: 0.3s;
 }
 
-.client-info span {
-    font-size: 13px;
-    color: var(--gray);
+.btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+
+/* ── 6. MOBILE FIXES ── */
+@media (max-width: 991px) {
+    body { padding-top: 150px; }
+    nav { flex-direction: column; top: 45px; padding: 10px; }
+    .nav-links { margin-top: 10px; gap: 15px; flex-wrap: wrap; justify-content: center; }
+    
+    .hero { flex-direction: column; text-align: center; padding-top: 40px; }
+    .hero-content h1 { font-size: 2.5rem; }
+    .hero-image { order: -1; margin-bottom: 30px; }
 }
 
-/* ============================================================
-   CONTACT
-   ============================================================ */
-.contact {
-    padding: 90px 8%;
-    display: flex;
-    gap: 60px;
-    flex-wrap: wrap;
-    background: #fff;
-}
-
-.contact-box,
-.map-box {
-    flex: 1;
-    min-width: 300px;
-}
-
-.contact-box h2 {
-    font-size: 32px;
-    margin-bottom: 30px;
-}
-
-.map-box h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.map-box p {
-    color: var(--gray);
-    margin-bottom: 10px;
-}
-
-/* ✅ Fixed: targets form inside .contact only to avoid clashing with inline forms */
-.contact form input,
-.contact form textarea,
-.contact form select {
-    width: 100%;
-    padding: 16px;
-    margin: 12px 0;
-    border-radius: 12px;
-    border: 1px solid #e0e0e0;
-    outline: none;
-    background: #fafafa;
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
-    transition: border-color 0.3s;
-}
-
-.contact form textarea {
-    height: 120px;
-    resize: none;
-}
-
-.contact form input:focus,
-.contact form textarea:focus,
-.contact form select:focus {
-    border-color: var(--primary);
-}
-
-@media (max-width: 768px) {
-    .contact { gap: 40px; }
-}
-
-/* ============================================================
-   WHATSAPP FLOAT
-   ============================================================ */
+/* ── 7. WHATSAPP & POPUP FIX ── */
 .whatsapp-float {
     position: fixed;
-    bottom: 90px; /* ✅ raised above mobile sticky bar */
+    bottom: 30px;
     right: 30px;
     background: #25d366;
     color: white;
@@ -456,262 +186,11 @@ nav {
     align-items: center;
     justify-content: center;
     font-size: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-    z-index: 998;
-    text-decoration: none;
-    transition: transform 0.3s;
+    z-index: 2001;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-.whatsapp-float:hover { transform: scale(1.1); }
-
-@media (min-width: 769px) {
-    .whatsapp-float { bottom: 35px; right: 35px; }
-}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-footer {
-    display: block;
-    width: 100%;
-    background: #0d1117;
-    color: white;
-    padding: 60px 8% 30px;
-    margin-top: 50px;
-    clear: both;
-}
-
-.footer-logo {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-}
-
-.footer-logo span { color: #007bff; }
-
-.social-icons a {
-    display: inline-block;
-    margin: 0 10px;
-    font-size: 22px;
-    text-decoration: none;
-    transition: transform 0.3s, opacity 0.3s;
-}
-
-.social-icons a:hover {
-    transform: translateY(-3px);
-    opacity: 0.8;
-}
-
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 25px;
-    text-align: center;
-    margin-top: 30px;
-}
-
-.disclaimer {
-    font-size: 12px;
-    margin-top: 15px;
-    opacity: 0.6;
-    color: #aaa;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-}
- /* Footer Legal Links Styling */
-    .footer-bottom a {
-        color: #4285F4;
-        /* Blue color for links */
-        text-decoration: none;
-        transition: 0.3s;
-        font-weight: 500;
-    }
-
-    .footer-bottom a:hover {
-        color: #ffffff;
-        /* Hover karne par white ho jayega */
-        text-decoration: underline;
-    }
-
-    .disclaimer {
-        line-height: 1.6;
-        border-top: 1px solid #333;
-        padding-top: 10px;
-    }
-
-@media (max-width: 768px) {
-    /* ✅ extra bottom padding so footer text clears the sticky bar */
-    footer { padding: 40px 5% 110px; }
-}
-
-/* ============================================================
-   POPUP
-   ============================================================ */
-.popup-overlay {
-    position: fixed;
-    inset: 0;               /* shorthand for top/right/bottom/left: 0 */
-    background: rgba(0, 0, 0, 0.85);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-}
-
-.popup-content {
-    background: white;
-    width: 90%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: row;
-    border-radius: 20px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-}
-
-.popup-left {
-    background: var(--gradient);
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 20px;
-}
-
-.popup-left img { width: 100px; height: auto; }
-
-.popup-right {
-    flex: 1.5;
-    padding: 30px;
-    text-align: left;
-}
-
-.popup-right h2 { font-size: 26px; margin-bottom: 10px; }
-.popup-right p  { font-size: 15px; color: #555; }
-
-.popup-features {
-    list-style: none;
-    margin: 20px 0;
-    padding: 0;
-}
-
-.popup-features li {
-    margin-bottom: 10px;
-    font-size: 15px;
-    color: #444;
-}
-
-.popup-features i {
-    color: var(--primary);
-    margin-right: 10px;
-}
-
-.timer {
-    font-size: 12px;
-    color: #c0392b;
-    margin-top: 15px;
-    font-weight: 600;
-}
-
-.close-btn {
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--gray);
-    line-height: 1;
-    background: none;
-    border: none;
-    transition: color 0.2s;
-}
-
-.close-btn:hover { color: var(--dark); }
-
-@media (max-width: 768px) {
-    .popup-content {
-        flex-direction: column;
-        width: 88%;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    .popup-left {
-        padding: 20px;
-        min-height: 100px;
-    }
-
-    .popup-left img { width: 70px; }
-
-    .popup-right {
-        padding: 20px;
-        text-align: center;
-    }
-
-    .popup-right h2  { font-size: 20px; }
-    .popup-right p   { font-size: 13px; }
-
-    .popup-features li {
-        font-size: 13px;
-        text-align: left;
-    }
-
-    .btn-primary {
-        width: 100%;
-        font-size: 14px;
-        padding: 12px;
-        text-align: center;
-    }
-
-    .close-btn {
-        background: white;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        top: 10px;
-        right: 10px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        font-size: 18px;
-    }
-}
- /* Force image to show */
-.hero-image img {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    width: 100% !important;
-    max-width: 500px !important;
-    height: auto !important;
-}
-/* 🚨 ULTIMATE SCROLL FIX 🚨 */
-html {
-    overflow-y: scroll !important; /* Hamesha scrollbar dikhayega */
-    height: auto !important;
-}
-
-body {
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    height: auto !important;
-    position: relative !important;
-    touch-action: auto !important; /* Mobile touch scroll ke liye */
-}
-
-/* Agar koi invisible layer rok rahi hai toh use hatao */
 #offerPopup:not([style*="display: flex"]) {
-    pointer-events: none !important;
     display: none !important;
-}
-
-/* ============================================================
-   MOBILE NAVBAR (Hamburger placeholder)
-   ============================================================ */
-@media (max-width: 768px) {
-    .navbar { padding: 12px 5%; }
-    .nav-links { display: none; }  /* Add JS hamburger menu to enable */
+    pointer-events: none !important;
 }
