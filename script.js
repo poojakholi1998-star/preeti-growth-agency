@@ -1,85 +1,145 @@
-// Test karne ke liye ki JS file chal rahi hai ya nahi
-console.log("JS file successfully load ho gayi hai!");
+/* ============================================================
+   Preeti Growth Agency — script.js (cleaned & fixed)
+   ============================================================ */
 
-function showPopup() {
-    const popup = document.getElementById('offerPopup');
-    if (popup) {
-        popup.style.display = 'flex';
-        console.log("Popup display ab FLEX ho gaya hai");
-    } else {
-        console.error("Error: 'offerPopup' wali ID nahi mili!");
-    }
-}
-
-// Bina window.onload ke direct try karte hain
-setTimeout(showPopup, 3000); // 3 seconds baad pakka chalega
-
-function closePopup() {
-    document.getElementById('offerPopup').style.display = 'none';
-}// Initialize AOS (Animate On Scroll)
+/* ── 1. AOS (Animate On Scroll) init ── */
 AOS.init({
     duration: 1000,
     offset: 200,
     once: true
 });
 
-// Form Submission (Dummy)
-document.getElementById('agencyForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    alert('Thank you! Preeti Growth Agency team will contact you soon.');
-    this.reset();
+/* ── 2. Popup ──────────────────────────────────────────────── */
+/* ✅ Fixed: was defined twice before; single clean version here */
+function showPopup() {
+    const popup = document.getElementById('offerPopup');
+    if (!popup) return;
+    /* Only show once per browser session */
+    if (sessionStorage.getItem('popupShown')) return;
+    popup.style.display = 'flex';
+    sessionStorage.setItem('popupShown', 'true');
+}
+
+function closePopup() {
+    const popup = document.getElementById('offerPopup');
+    if (popup) popup.style.display = 'none';
+}
+
+/* Show popup 5 seconds after full page load */
+window.addEventListener('load', function () {
+    setTimeout(showPopup, 5000);
 });
 
-// Smooth Scrolling for Navigation
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
+/* Close popup when clicking outside the content box */
+document.addEventListener('click', function (e) {
+    const overlay = document.getElementById('offerPopup');
+    if (e.target === overlay) closePopup();
 });
+
+/* ── 3. WhatsApp Form ──────────────────────────────────────── */
+/* ✅ Fixed: values are now properly encoded with encodeURIComponent */
 function sendToWhatsApp() {
-    // 1. Data collect karna
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
     const service = document.getElementById('service').value;
-    const message = document.getElementById('message').value;
+    const message = document.getElementById('message').value.trim();
 
-    // 2. Validation (Check karna ki fields khali toh nahi)
-    if (name === "" || phone === "" || message === "") {
-        alert("Please saari details bharein!");
+    if (!name || !phone || !message) {
+        alert('Please saari details bharein!');
         return;
     }
 
-    // 3. WhatsApp Message taiyar karna
-    const whatsappNumber = "918383855004"; // Aapka number
+    /* Basic phone number validation */
+    if (!/^\d{10}$/.test(phone.replace(/\s+/g, ''))) {
+        alert('Please ek valid 10-digit phone number dalein.');
+        return;
+    }
 
-    // Message format (URL encoded)
-    const encodedMessage = `*New Inquiry - Preeti Growth Agency*%0A%0A` +
-        `*Name:* ${name}%0A` +
-        `*Phone:* ${phone}%0A` +
-        `*Service:* ${service}%0A` +
-        `*Message:* ${message}`;
+    const whatsappNumber = '918383855004';
 
-    // 4. WhatsApp open karna
-    const url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-    window.open(url, '_blank').focus();
+    const text = encodeURIComponent(
+        `*New Inquiry — Preeti Growth Agency*\n\n` +
+        `*Name:* ${name}\n` +
+        `*Phone:* ${phone}\n` +
+        `*Service:* ${service}\n` +
+        `*Message:* ${message}`
+    );
+
+    window.open(`https://wa.me/${whatsappNumber}?text=${text}`, '_blank');
 }
-// Function to show popup
-function showPopup() {
-    const popup = document.getElementById('offerPopup');
-    if (popup && !sessionStorage.getItem('popupShown')) {
-        popup.style.display = 'flex';
-        sessionStorage.setItem('popupShown', 'true');
+
+/* ── 4. Contact form — prevent default HTML submit ─────────── */
+/* ✅ Fixed: was looking for 'agencyForm' which doesn't exist in HTML;
+   now targets 'whatsappForm' which matches the actual form ID */
+const contactForm = document.getElementById('whatsappForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        sendToWhatsApp();
+    });
+}
+
+/* ── 5. Smooth scrolling for anchor links ──────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+//* ── ROI Calculator Logic ── */
+function calculateROI() {
+    // 1. Inputs se values lena
+    const dailyBudget = parseFloat(document.getElementById('budget').value) || 0;
+    const costPerLead = parseFloat(document.getElementById('quality').value) || 1;
+
+    // 2. Calculation karna
+    const dailyLeads = dailyBudget > 0 ? Math.floor(dailyBudget / costPerLead) : 0;
+    const monthlyLeads = dailyLeads * 30;
+    const monthlyBudgetTotal = dailyBudget * 30;
+
+    // 3. Website par results dikhana
+    document.getElementById('leads-output').innerText = dailyLeads;
+    document.getElementById('monthly-output').innerText = monthlyLeads;
+
+    // Monthly budget ko comma ke sath professional dikhana (e.g., 15,000)
+    document.getElementById('monthly-budget').innerText = Math.round(monthlyBudgetTotal).toLocaleString('en-IN');
+}
+
+// Page load hote hi calculation ek baar chal jaye
+window.onload = calculateROI;
+
+/* Run once on load so default values show correctly */
+document.addEventListener('DOMContentLoaded', calculateROI);
+
+/* ── 7. Quiz ───────────────────────────────────────────────── */
+let currentStep = 0;
+let totalScore = 0;
+
+const questions = [
+    'Kya aapka business Google Maps par hai?',
+    'Kya aap Facebook/Instagram par ads chalate hain?',
+    'Kya aapke paas professional website hai?',
+    'Kya aap daily social media post karte hain?',
+    'Kya aapke paas verified leads ka data hai?'
+];
+
+function nextQuestion(points) {
+    totalScore += points;
+    currentStep += 1;
+
+    if (currentStep < questions.length) {
+        document.getElementById('question-text').innerText = questions[currentStep];
+    } else {
+        document.getElementById('question-box').style.display = 'none';
+        document.getElementById('score-result').style.display = 'block';
+        document.getElementById('final-score').innerText = totalScore;
+        document.getElementById('score-msg').innerText = totalScore < 60
+            ? 'Aapka business online piche hai! Ise grow karne ki zaroorat hai.'
+            : 'Aap sahi raste par hain, lekin scale karne ke liye expert help chahiye!';
     }
 }
 
-// Ye tarika sabse safe hai, ye dusre scripts ko disturb nahi karega
-window.addEventListener('load', function () {
-    setTimeout(showPopup, 5000); // 5 seconds baad dikhayega
-});
-
-function closePopup() {
-    document.getElementById('offerPopup').style.display = 'none';
-}
+console.log('✅ Preeti Growth Agency — script.js loaded successfully.');
